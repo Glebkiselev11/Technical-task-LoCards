@@ -18,7 +18,7 @@ export class UserService {
     if (user) {
       return this.userTokenService.generateToken()
     }
-    throw new UnauthorizedException('Unauthorized')
+    throw new UnauthorizedException()
   }
 
 
