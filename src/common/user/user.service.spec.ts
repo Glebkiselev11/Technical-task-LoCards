@@ -40,13 +40,6 @@ describe('UserService', () => {
       expect(service.checkUser).toBeDefined()
     })
 
-    it('should return error object', () => {
-      expect(service.checkUser('email', 'password')).toEqual({
-        "statusCode": 401,
-        "error": "Unauthorized"
-      })
-    })
-
     it('should return string.length equal 32', () => {
       expect(service.checkUser('admin@admin.ru', '12345678')).toHaveLength(32)
     })

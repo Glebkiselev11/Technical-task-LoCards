@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from './user';
 import { UserTokenService } from './token/user-token.service';
 
@@ -15,19 +15,14 @@ export class UserService {
 
   checkUser(email: string, pass: string) {
     const user = this.findUser(email, pass)
-    
     if (user) {
       return this.userTokenService.generateToken()
     }
-
-    return {
-      "statusCode": 401,
-      "error": "Unauthorized"
-    }
+    throw new UnauthorizedException('Unauthorized')
   }
 
 
-  private findUser(email: string, pass: string): boolean {
+  findUser(email: string, pass: string): boolean {
     const user = this.users.find(user => user.email === email && user.password === pass)
     return user ? true : false
   } 
